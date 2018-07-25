@@ -41,7 +41,7 @@ Add a project to one or more other target projects.
 Add one or more native targets from a project, to one or more other projects.
 
 ```typescript
- {
+{
   /**
    * Relative path to the target project in which
    * The path is relative to the Container root directory.
@@ -71,10 +71,10 @@ Add one or more native targets from a project, to one or more other projects.
 ### With `ern transform-container` CLI command
 
 ```bash
-$ ern transform-container --containerPath [pathToContainer] -t pbxproj -c '{"addProjects":[...], "addTargetDependencies":[...]}'
+$ ern transform-container --containerPath [pathToContainer] -t pbxproj -e '{"addProjects":[...], "addTargetDependencies":[...]}'
 ```
 
-Instead of passing the whole configuration on the command line for `--config/-c`, it is also possible to use a file path of a json file holding the configuration.
+Instead of passing the whole configuration on the command line for `--extra/-e`, it is also possible to use a file path to a json file holding the configuration, or a path to a file stored in the Cauldron. Check out the [ern transform-container](https://native.electrode.io/cli-commands/transform-container) command documentation for more info.
 
 ### With Cauldron
 
