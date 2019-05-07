@@ -2,7 +2,7 @@ import path from 'path'
 import { PbxProjTransformerConfig } from './types'
 import { addProject } from './addProject'
 import { addTargetDependency } from './addTargetDependency'
-
+import { setBuildSettings } from './setBuildSettings'
 export default class PbxProjTransformer {
   /**
    * Name of this transformer
@@ -45,9 +45,7 @@ export default class PbxProjTransformer {
           })
         }
       }
-    }
 
-    for (const conf of extraArr) {
       if (conf.addTargetDependencies) {
         for (const addTargetDependencyConf of conf.addTargetDependencies) {
           await addTargetDependency({
@@ -57,6 +55,18 @@ export default class PbxProjTransformer {
               addTargetDependencyConf.targetProjectPath
             ),
             sourceNativeTargets: addTargetDependencyConf.sourceNativeTargets,
+          })
+        }
+      }
+
+      if (conf.setBuildSettings) {
+        for (const setBuildSettingsConf of conf.setBuildSettings) {
+          await setBuildSettings({
+            targetProjectPath: path.join(
+              containerPath,
+              setBuildSettingsConf.targetProjectPath
+            ),
+            buildSettings: setBuildSettingsConf.buildSettings,
           })
         }
       }

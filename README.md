@@ -9,6 +9,7 @@ For now this transformer only allows adding projects to other projects, as well 
 - `containerPath` : Path to the Container to transform
 - `addProjects` : Array of `AddProject` objects (see below)
 - `addTargetDependencies` : Array of `AddTargetDependency` objects (see below)
+- `setBuildSettings` : Array of `SetBuildSettings` objects (see below)
 
 ## Patching directives objects
 
@@ -66,12 +67,46 @@ Add one or more native targets from a project, to one or more other projects.
 }
 ```
 
+#### `SetBuildSettings`
+
+Set one more build settings in one or more target projects.
+
+```typescript
+{
+  /**
+   * Absolute path to the target project in which
+   * to add a target dependency from another project
+   * Can also be a glob. If multiple projects are
+   * matching the glob pattern, then all of these
+   * projects will be transformed sequentially.
+   */
+  targetProjectPath: string
+
+  /**
+   * Array of native targets from the source project to
+   * add as target dependencies in the target project(s).
+   */
+  buildSettings: {
+    /**
+      * Configuration(s) for which these build settings apply.
+      * For example [ 'Debug' , 'Release' ]
+      */
+    configurations: string[]
+
+    /**
+     * Build settings as key values pairs
+     */
+    settings: { [key: string]: string }
+  }[]
+}
+```
+
 ## Usage
 
 ### With `ern transform-container` CLI command
 
 ```bash
-$ ern transform-container --containerPath [pathToContainer] -t pbxproj -e '{"addProjects":[...], "addTargetDependencies":[...]}'
+$ ern transform-container --containerPath [pathToContainer] -t pbxproj -e '{"addProjects":[...], "addTargetDependencies":[...]}, "setBuildSettings":[...]'
 ```
 
 Instead of passing the whole configuration on the command line for `--extra/-e`, it is also possible to use a file path to a json file holding the configuration, or a path to a file stored in the Cauldron. Check out the [ern transform-container](https://native.electrode.io/cli-commands/transform-container) command documentation for more info.
@@ -86,7 +121,8 @@ To automatically transform the Cauldron generated Containers of a target native 
     "name": "pbxproj",
     "extra": {
       "addProjects": [...],
-      "addTargetDependencies" : [...]
+      "addTargetDependencies" : [...],
+      "setBuildSettings": [...]
     }
   }
 ]
@@ -105,6 +141,7 @@ transformer.transform(
     extra?: {
       addProjects: AddProject[],
       addTargetDependencies: AddTargetDependency[]
+      setBuildSettings: SetBuildSettings[]
     }
   }
 })
