@@ -115,8 +115,24 @@ Instead of passing the whole configuration on the command line for `--extra/-e`,
 
 To automatically transform the Cauldron generated Containers of a target native application and platform, you can add a transformer entry in the Cauldron in the Container generator configuration object as follow :
 
+**Electrode Native <= 0.31**
+
 ```json
 "transformers": [
+  {
+    "name": "pbxproj",
+    "extra": {
+      "addProjects": [...],
+      "addTargetDependencies" : [...],
+      "setBuildSettings": [...]
+    }
+  }
+]
+```
+**Electrode Native >= 0.32**
+
+```json
+"pipeline": [
   {
     "name": "pbxproj",
     "extra": {
@@ -130,7 +146,7 @@ To automatically transform the Cauldron generated Containers of a target native 
 
 ### Programmatically
 
-```js
+```typescript
 import PbxProjTransformer from 'ern-container-transformer-pbxproj'
 const transformer = new BuildConfigTransformer()
 transformer.transform(
