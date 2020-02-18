@@ -9,7 +9,7 @@ export interface AddProject {
   targetProjectPath: string
 
   /**
-   * Absolute or relative path (relative to the parent directory 
+   * Absolute or relative path (relative to the parent directory
    * of the target .xcodeproj directory)
    */
   sourceProjectPath: string
