@@ -1,5 +1,7 @@
 # iOS pbxproj Container Transformer
 
+[![ci][1]][2]
+
 This transformer can be used to patch one or more pbxproj (iOS project file) included in the Container, in specific ways.
 
 For now this transformer only allows adding projects to other projects, as well as adding other project targets as target dependencies of any project.
@@ -163,3 +165,6 @@ transformer.transform(
   }
 })
 ```
+
+[1]: https://github.com/electrode-io/ern-container-transformer-pbxproj/workflows/ci/badge.svg
+[2]: https://github.com/electrode-io/ern-container-transformer-pbxproj/actions
