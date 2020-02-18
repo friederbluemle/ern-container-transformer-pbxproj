@@ -1,5 +1,7 @@
 # iOS pbxproj Container Transformer
 
+[![ci][1]][2]
+
 This transformer can be used to patch one or more pbxproj (iOS project file) included in the Container, in specific ways.
 
 For now this transformer only allows adding projects to other projects, as well as adding other project targets as target dependencies of any project.
@@ -13,7 +15,7 @@ For now this transformer only allows adding projects to other projects, as well 
 
 ## Patching directives objects
 
-#### `AddProject`
+### `AddProject`
 
 Add a project to one or more other target projects.
 
@@ -37,7 +39,7 @@ Add a project to one or more other target projects.
 }
 ```
 
-#### `AddTargetDependency`
+### `AddTargetDependency`
 
 Add one or more native targets from a project, to one or more other projects.
 
@@ -67,7 +69,7 @@ Add one or more native targets from a project, to one or more other projects.
 }
 ```
 
-#### `SetBuildSettings`
+### `SetBuildSettings`
 
 Set one more build settings in one or more target projects.
 
@@ -105,8 +107,8 @@ Set one more build settings in one or more target projects.
 
 ### With `ern transform-container` CLI command
 
-```bash
-$ ern transform-container --containerPath [pathToContainer] -t pbxproj -e '{"addProjects":[...], "addTargetDependencies":[...]}, "setBuildSettings":[...]'
+```sh
+ern transform-container --containerPath [pathToContainer] -t pbxproj -e '{"addProjects":[...], "addTargetDependencies":[...]}, "setBuildSettings":[...]'
 ```
 
 Instead of passing the whole configuration on the command line for `--extra/-e`, it is also possible to use a file path to a json file holding the configuration, or a path to a file stored in the Cauldron. Check out the [ern transform-container](https://native.electrode.io/cli-commands/transform-container) command documentation for more info.
@@ -115,7 +117,7 @@ Instead of passing the whole configuration on the command line for `--extra/-e`,
 
 To automatically transform the Cauldron generated Containers of a target native application and platform, you can add a transformer entry in the Cauldron in the Container generator configuration object as follow :
 
-**Electrode Native <= 0.31**
+#### Electrode Native <= 0.31
 
 ```json
 "transformers": [
@@ -129,7 +131,8 @@ To automatically transform the Cauldron generated Containers of a target native 
   }
 ]
 ```
-**Electrode Native >= 0.32**
+
+#### Electrode Native >= 0.32
 
 ```json
 "pipeline": [
@@ -162,3 +165,6 @@ transformer.transform(
   }
 })
 ```
+
+[1]: https://github.com/electrode-io/ern-container-transformer-pbxproj/workflows/ci/badge.svg
+[2]: https://github.com/electrode-io/ern-container-transformer-pbxproj/actions
